@@ -30,14 +30,12 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnEnemy()
     {
-        Vector3 enemySpawnPoint = enemySpawnPerimeter.GetRandomSpawnPoint();
-        print(enemySpawnPoint);
-        Vector3 enemyDirection = new Vector3(0, Random.Range(0, 360), 0);
+        enemySpawnPerimeter.GetRandomTransform(out Vector3 enemySpawnPoint, out Vector3 enemyRotateTo);
 
-        var instance = Instantiate(enemyPrefab, enemySpawnPoint, Quaternion.Euler(enemyDirection));
+        var instance = Instantiate(enemyPrefab, enemySpawnPoint, Quaternion.identity);
 
         var enemy = instance.GetComponent<EnemyController>();
-        enemy.Init(minEnemyMoveSpeed, maxEnemyMoveSpeed);
+        enemy.Init(enemyRotateTo, minEnemyMoveSpeed, maxEnemyMoveSpeed);
         enemy.Destroyed += OnEnemyDestroyed;
 
         yield return new WaitForSeconds(timeToEnemySpawn);

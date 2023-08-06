@@ -14,8 +14,9 @@ public class EnemyController : MonoBehaviour
     private float moveSpeed;
     private bool canReceiveHit = true;
 
-    public void Init(int minSpeed, int maxSpeed)
+    public void Init(Vector3 rotateTo, int minSpeed, int maxSpeed)
     {
+        transform.LookAt(rotateTo);
         moveSpeed = UnityEngine.Random.Range(minSpeed, maxSpeed);
         StartCoroutine(LifeTimer());
     }
@@ -36,7 +37,6 @@ public class EnemyController : MonoBehaviour
         if (collider == bodyCollider)
         {
             player.RecieveDamage();
-            Debug.Log("BODY");
             canReceiveHit = false;
         }
 
@@ -44,7 +44,6 @@ public class EnemyController : MonoBehaviour
         {
             Destroyed?.Invoke(this);
             player.OnEnemyDestroy();
-            Debug.Log("HEAD");
             Die();
         }
     }
