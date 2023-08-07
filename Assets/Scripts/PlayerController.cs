@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
@@ -16,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheckPoint;
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private LayerMask groundLayer;
+
+    public Action<int> OnDamageReceive;
 
     private void Awake()
     {
@@ -77,7 +81,8 @@ public class PlayerController : MonoBehaviour
 
     public void RecieveDamage()
     {
-        Debug.Log("GAME OVER");
+        OnDamageReceive?.Invoke(0);
+        Destroy(gameObject);
     }
 
     public void OnEnemyDestroy()

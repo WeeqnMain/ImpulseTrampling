@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private float timeToEnemySpawn;
 
-    [SerializeField] private ScoreManager scoreManager;
+    private ScoreManager scoreManager;
 
     private EnemySpawnPerimeter enemySpawnPerimeter;
 
@@ -17,6 +17,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform leftTopPoint;
     [SerializeField] private Transform rightTopPoint;
     [SerializeField] private Transform rightBottomPoint;
+
+    public void Init(ScoreManager scoreManager)
+    {
+        this.scoreManager = scoreManager;
+    }
 
     private void Awake()
     {
@@ -36,15 +41,9 @@ public class EnemySpawner : MonoBehaviour
 
         var enemy = instance.GetComponent<EnemyController>();
         enemy.Init(enemyRotateTo, minEnemyMoveSpeed, maxEnemyMoveSpeed);
-        enemy.Destroyed += OnEnemyDestroyed;
+        enemy.Destroyed += scoreManager.OnEnemyDestroyed;
 
         yield return new WaitForSeconds(timeToEnemySpawn);
         StartCoroutine(SpawnEnemy());
-    }
-
-    private void OnEnemyDestroyed(EnemyController enemy)
-    {
-        enemy.Destroyed -= OnEnemyDestroyed;
-        scoreManager.IncreaseScore();
     }
 }
