@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(BoxCollider))]
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private BoxCollider bodyCollider;
     [SerializeField] private BoxCollider hitCollider;
+
+    [SerializeField] private GameObject hitEffect;
 
     public Action<EnemyController> Destroyed;
 
@@ -32,7 +34,10 @@ public class EnemyController : MonoBehaviour
         if (player == null) return;
         if (canReceiveHit == false) return;
 
-        var collider = collision.contacts[0].thisCollider;
+        var contact = collision.contacts[0];
+        var collider = contact.thisCollider;
+
+        Instantiate(hitEffect, contact.point, Quaternion.identity, null);
 
         if (collider == bodyCollider)
         {
@@ -40,7 +45,7 @@ public class EnemyController : MonoBehaviour
             canReceiveHit = false;
         }
 
-        if (collider == hitCollider)
+        else if (collider == hitCollider)
         {
             Destroyed?.Invoke(this);
             player.OnEnemyDestroy();
