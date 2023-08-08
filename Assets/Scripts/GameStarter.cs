@@ -16,7 +16,6 @@ public class GameStarter : MonoBehaviour
         var playerController = player.GetComponent<PlayerController>();
         playerController.OnDamageReceive += canvas.PlayerReceivedDamage;
         
-
         var enemySpawner = Instantiate(enemySpawnerPrefab.gameObject);
         enemySpawner.GetComponent<EnemySpawner>().Init(scoreManager);
     }

@@ -174,9 +174,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minEnemyMoveSpeed: 4
   maxEnemyMoveSpeed: 6
-  enemyPrefab: {fileID: 1086393491141130309, guid: 2976449518a8f864a9f00e78d97cf3c6, type: 3}
   timeToEnemySpawn: 3
-  scoreManager: {fileID: 0}
+  capacity: 10
+  autoExpand: 1
+  enemyPrefab: {fileID: 1086393491141130307, guid: 2976449518a8f864a9f00e78d97cf3c6, type: 3}
+  container: {fileID: 6412160380861630874}
   leftBottomPoint: {fileID: 853320696}
   leftTopPoint: {fileID: 1225300720}
   rightTopPoint: {fileID: 711610347}

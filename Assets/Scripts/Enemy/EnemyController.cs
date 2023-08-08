@@ -11,28 +11,57 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private GameObject hitEffect;
 
+    [SerializeField] private float lifeTime;
+    private float lifeTimer;
+
     public Action<EnemyController> Destroyed;
 
     private float moveSpeed;
-    private bool canReceiveHit = true;
+
+    private bool isActive;
+    private bool canReceiveHit;
+
+    private void Awake()
+    {
+        lifeTimer = lifeTime;
+    }
 
     public void Init(Vector3 rotateTo, int minSpeed, int maxSpeed)
     {
         transform.LookAt(rotateTo);
         moveSpeed = UnityEngine.Random.Range(minSpeed, maxSpeed);
-        StartCoroutine(LifeTimer());
+    }
+
+    private void OnEnable()
+    {
+        isActive = true;
+        canReceiveHit = true;
+        lifeTimer = lifeTime;
+    }
+
+    private void OnDisable()
+    {
+        isActive = false;
     }
 
     private void Update()
     {
+        if (isActive == false) return;
+
+        lifeTimer -= Time.deltaTime;
+        if (lifeTimer < 0f)
+            Deactivate();
+
         rigidbody.MovePosition(transform.position + moveSpeed * Time.deltaTime * transform.forward);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (isActive == false) return;
+        if (canReceiveHit == false) return;
+
         var player = collision.gameObject.GetComponent<PlayerController>();
         if (player == null) return;
-        if (canReceiveHit == false) return;
 
         var contact = collision.contacts[0];
         var collider = contact.thisCollider;
@@ -42,26 +71,19 @@ public class EnemyController : MonoBehaviour
         if (collider == bodyCollider)
         {
             player.RecieveDamage();
-            canReceiveHit = false;
         }
 
         else if (collider == hitCollider)
         {
             Destroyed?.Invoke(this);
             player.OnEnemyDestroy();
-            Die();
+            Deactivate();
         }
+        canReceiveHit = false;
     }
 
-    private void Die()
+    private void Deactivate()
     {
-        Destroy(gameObject);
-    }
-
-    //fix when enemy pool is created
-    private IEnumerator LifeTimer()
-    {
-        yield return new WaitForSeconds(15f);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

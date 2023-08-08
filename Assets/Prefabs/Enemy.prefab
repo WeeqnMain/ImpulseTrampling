@@ -52,6 +52,7 @@ MonoBehaviour:
   bodyCollider: {fileID: 3461417998656345578}
   hitCollider: {fileID: 1049013067649508899}
   hitEffect: {fileID: 339341285434815660, guid: 01712080762885a43a9eb09d24220d83, type: 3}
+  lifeTime: 30
 --- !u!54 &1086393491141130306
 Rigidbody:
   m_ObjectHideFlags: 0
