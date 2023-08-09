@@ -172,10 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c32743756e4fe45931a2d4b5736520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minEnemyMoveSpeed: 4
-  maxEnemyMoveSpeed: 6
-  timeToEnemySpawn: 3
-  capacity: 10
+  timeToEnemySpawn: 2
+  capacity: 5
   autoExpand: 1
   enemyPrefab: {fileID: 1086393491141130307, guid: 2976449518a8f864a9f00e78d97cf3c6, type: 3}
   container: {fileID: 6412160380861630874}

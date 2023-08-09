@@ -48,11 +48,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa09fccb9b4b6d4fb7df977b6e70f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minEnemyMoveSpeed: 4
+  maxEnemyMoveSpeed: 6
+  lifeTime: 30
+  minPointsForDestroy: 1
+  maxPointsForDestroy: 2
   rigidbody: {fileID: 1086393491141130306}
   bodyCollider: {fileID: 3461417998656345578}
   hitCollider: {fileID: 1049013067649508899}
   hitEffect: {fileID: 339341285434815660, guid: 01712080762885a43a9eb09d24220d83, type: 3}
-  lifeTime: 30
 --- !u!54 &1086393491141130306
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -64,8 +68,8 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0

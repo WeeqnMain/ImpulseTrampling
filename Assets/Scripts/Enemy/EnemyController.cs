@@ -1,53 +1,50 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(BoxCollider))]
 public class EnemyController : MonoBehaviour
 {
+    [Header("Enemy Specs")]
+    [SerializeField] private int minEnemyMoveSpeed;
+    [SerializeField] private int maxEnemyMoveSpeed;
+    private float moveSpeed;
+
+    [SerializeField] private float lifeTime;
+    private float lifeTimer;
+
+    [SerializeField] private int minPointsForDestroy;
+    [SerializeField] private int maxPointsForDestroy;
+    private int pointsForDestroy;
+
+    [Header("Physics")]
     [SerializeField] private Rigidbody rigidbody;
     [SerializeField] private BoxCollider bodyCollider;
     [SerializeField] private BoxCollider hitCollider;
 
     [SerializeField] private GameObject hitEffect;
 
-    [SerializeField] private float lifeTime;
-    private float lifeTimer;
 
-    public Action<EnemyController> Destroyed;
+    public Action<int> Destroyed;
 
-    private float moveSpeed;
-
-    private bool isActive;
-    private bool canReceiveHit;
+    public void SetRotation(Vector3 rotateTo)
+    {
+        transform.LookAt(rotateTo);
+    }
 
     private void Awake()
     {
         lifeTimer = lifeTime;
     }
 
-    public void Init(Vector3 rotateTo, int minSpeed, int maxSpeed)
-    {
-        transform.LookAt(rotateTo);
-        moveSpeed = UnityEngine.Random.Range(minSpeed, maxSpeed);
-    }
-
     private void OnEnable()
     {
-        isActive = true;
-        canReceiveHit = true;
         lifeTimer = lifeTime;
-    }
-
-    private void OnDisable()
-    {
-        isActive = false;
+        moveSpeed = UnityEngine.Random.Range(minEnemyMoveSpeed, maxEnemyMoveSpeed + 1);
+        pointsForDestroy = UnityEngine.Random.Range(minPointsForDestroy, maxPointsForDestroy + 1);
     }
 
     private void Update()
     {
-        if (isActive == false) return;
-
         lifeTimer -= Time.deltaTime;
         if (lifeTimer < 0f)
             Deactivate();
@@ -57,9 +54,6 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (isActive == false) return;
-        if (canReceiveHit == false) return;
-
         var player = collision.gameObject.GetComponent<PlayerController>();
         if (player == null) return;
 
@@ -75,11 +69,11 @@ public class EnemyController : MonoBehaviour
 
         else if (collider == hitCollider)
         {
-            Destroyed?.Invoke(this);
+            Destroyed?.Invoke(pointsForDestroy);
             player.OnEnemyDestroy();
-            Deactivate();
         }
-        canReceiveHit = false;
+
+        Deactivate();
     }
 
     private void Deactivate()

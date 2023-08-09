@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Enemy Specs")]
-    [SerializeField] private int minEnemyMoveSpeed;
-    [SerializeField] private int maxEnemyMoveSpeed;
     [SerializeField] private float timeToEnemySpawn;
 
     [Header("Pool")]
@@ -28,14 +25,15 @@ public class EnemySpawner : MonoBehaviour
     public void Init(ScoreManager scoreManager)
     {
         this.scoreManager = scoreManager;
-    }
-
-    private void Awake()
-    {
         enemySpawnPerimeter = new EnemySpawnPerimeter(leftBottomPoint, leftTopPoint, rightTopPoint, rightBottomPoint);
 
         pool = new PoolMono<EnemyController>(enemyPrefab, capacity, container);
         pool.autoExpand = autoExpand;
+
+        foreach (var enemy in pool.GetAllElements())
+        {
+            enemy.Destroyed += scoreManager.OnEnemyDestroyed;
+        }
     }
 
     private void Start()
@@ -51,8 +49,13 @@ public class EnemySpawner : MonoBehaviour
         instance.transform.position = enemySpawnPoint;
 
         var enemy = instance.GetComponent<EnemyController>();
-        enemy.Init(enemyRotateTo, minEnemyMoveSpeed, maxEnemyMoveSpeed);
-        enemy.Destroyed += scoreManager.OnEnemyDestroyed;
+        enemy.SetRotation(enemyRotateTo);
+
+        if (pool.GetAllElements().Count > capacity)
+        {
+            enemy.Destroyed += scoreManager.OnEnemyDestroyed;
+            capacity = pool.GetAllElements().Count;
+        }
 
         yield return new WaitForSeconds(timeToEnemySpawn);
         StartCoroutine(SpawnEnemy());

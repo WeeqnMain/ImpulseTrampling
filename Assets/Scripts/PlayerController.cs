@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
@@ -29,22 +28,19 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         inputDirection = GetInputDirection();
+        isGrounded = Physics.Raycast(groundCheckPoint.position, -transform.up, groundCheckDistance, groundLayer);
 
         if (isGrounded)
         {
-            Look();
+            LookAtDirection();
 
             if (Input.GetKeyDown(KeyCode.Space))
-            {
                 Jump();
-            }
         }
-        
     }
 
     private void FixedUpdate()
     {
-        isGrounded = Physics.Raycast(groundCheckPoint.position, -transform.up, groundCheckDistance, groundLayer);
         if (isGrounded)
         {
             Move();
@@ -71,7 +67,7 @@ public class PlayerController : MonoBehaviour
         rigidbody.MovePosition(transform.position + transform.forward * moveSpeed * Time.deltaTime);
     }
 
-    private void Look()
+    private void LookAtDirection()
     {
         if (inputDirection == Vector3.zero) return;
 
