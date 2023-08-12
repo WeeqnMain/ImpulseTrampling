@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameStarter : MonoBehaviour
 {
-    [SerializeField] private bool saveHighscoreOnReset;
+    [SerializeField] private bool saveHighscore;
 
     [SerializeField] private PlayerController playerPrefab;
     [SerializeField] private EnemySpawner enemySpawnerPrefab;
@@ -21,7 +21,7 @@ public class GameStarter : MonoBehaviour
         var enemySpawner = Instantiate(enemySpawnerPrefab.gameObject);
         enemySpawner.GetComponent<EnemySpawner>().Init(scoreManager);
 
-        if (PlayerPrefs.HasKey("highscore") == !saveHighscoreOnReset)
+        if (PlayerPrefs.HasKey("highscore") == !saveHighscore)
             PlayerPrefs.SetInt("highscore", 0);
     }
 }

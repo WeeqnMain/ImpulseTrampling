@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
 
     public Action<int> OnDamageReceive;
 
+    [Header("SoundEffects")]
+    [SerializeField] private AudioSource jumpSound;
+    [SerializeField] private AudioSource landSound;
+    [SerializeField] private AudioSource moveSound;
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -28,7 +33,14 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         inputDirection = GetInputDirection();
+     
+        bool isGroundedInPreviousFrame = isGrounded;
         isGrounded = Physics.Raycast(groundCheckPoint.position, -transform.up, groundCheckDistance, groundLayer);
+
+        if (!isGroundedInPreviousFrame && isGrounded)
+        {
+            landSound.Play();
+        }
 
         if (isGrounded)
         {
@@ -55,6 +67,7 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         rigidbody.AddForce(jumpForce * transform.up);
+        jumpSound.Play();
     }
 
     private void Move()

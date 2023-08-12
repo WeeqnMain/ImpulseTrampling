@@ -21,8 +21,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private BoxCollider bodyCollider;
     [SerializeField] private BoxCollider hitCollider;
 
+    [Header("Effects")]
     [SerializeField] private GameObject hitEffect;
-
+    [SerializeField] private AudioClip[] deathSounds;
 
     public Action<int> Destroyed;
 

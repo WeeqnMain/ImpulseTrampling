@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class MainMenuButtons : MonoBehaviour
 {
+    [SerializeField] private AudioSource clickSound;
     [SerializeField] private Button playButton;
 
     private void Awake()
@@ -12,6 +13,7 @@ public class MainMenuButtons : MonoBehaviour
 
     private void PlayButtonClick()
     {
+        clickSound.Play();
         playButton.GetComponent<Button>().onClick.RemoveListener(PlayButtonClick);
         SceneLoader.ChangeScene("GameScene");
     }

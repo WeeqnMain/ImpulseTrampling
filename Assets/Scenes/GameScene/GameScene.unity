@@ -296,10 +296,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a97c8a10437c744a0d7f6da7bab2ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveHighscoreOnReset: 1
+  saveHighscore: 0
   playerPrefab: {fileID: 6977642239170130445, guid: 33f74b1dcf6fb4d409e9b4215f98c9e2, type: 3}
   enemySpawnerPrefab: {fileID: 6412160380861630875, guid: ee67db7e03c38bb4fbdefc412f169ffe, type: 3}
   UICanvasPrefab: {fileID: 286209897944408805, guid: 3794233a8af1e194883690d8b6d8617e, type: 3}
+  audioManager: {fileID: 5060039360537561236, guid: 5469799c5a3f4c742aa8195bbb4292eb, type: 3}
 --- !u!1 &499771443
 GameObject:
   m_ObjectHideFlags: 0
