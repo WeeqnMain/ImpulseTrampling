@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 180920863}
   - component: {fileID: 180920862}
   - component: {fileID: 180920861}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +300,6 @@ MonoBehaviour:
   playerPrefab: {fileID: 6977642239170130445, guid: 33f74b1dcf6fb4d409e9b4215f98c9e2, type: 3}
   enemySpawnerPrefab: {fileID: 6412160380861630875, guid: ee67db7e03c38bb4fbdefc412f169ffe, type: 3}
   UICanvasPrefab: {fileID: 286209897944408805, guid: 3794233a8af1e194883690d8b6d8617e, type: 3}
-  audioManager: {fileID: 5060039360537561236, guid: 5469799c5a3f4c742aa8195bbb4292eb, type: 3}
 --- !u!1 &499771443
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +474,7 @@ GameObject:
   - component: {fileID: 902131923}
   - component: {fileID: 902131922}
   - component: {fileID: 902131921}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,7 +884,7 @@ GameObject:
   - component: {fileID: 1274366691}
   - component: {fileID: 1274366690}
   - component: {fileID: 1274366689}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -982,7 +981,7 @@ GameObject:
   - component: {fileID: 1650150410}
   - component: {fileID: 1650150409}
   - component: {fileID: 1650150408}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

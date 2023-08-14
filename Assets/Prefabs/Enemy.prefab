@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1086393491141130306}
   - component: {fileID: 3461417998656345578}
   - component: {fileID: 1049013067649508899}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,9 +58,6 @@ MonoBehaviour:
   bodyCollider: {fileID: 3461417998656345578}
   hitCollider: {fileID: 1049013067649508899}
   hitEffect: {fileID: 339341285434815660, guid: 01712080762885a43a9eb09d24220d83, type: 3}
-  deathSounds:
-  - {fileID: 8300000, guid: eab7c37e1dc78bb43b5763e336898b9a, type: 3}
-  - {fileID: 8300000, guid: 6b392bb5f149d8246878306e2946e347, type: 3}
 --- !u!54 &1086393491141130306
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -114,7 +111,7 @@ GameObject:
   - component: {fileID: 1086393491735325299}
   - component: {fileID: 1086393491735325294}
   - component: {fileID: 1086393491735325297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 582820822016230591}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DeathSounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3982954786927758681}
   - component: {fileID: 5010282110853020538}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912750189020644112}
   - component: {fileID: 5405254611494220799}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: medium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
