@@ -23,7 +23,6 @@ public class EnemyController : MonoBehaviour
 
     [Header("Effects")]
     [SerializeField] private GameObject hitEffect;
-    [SerializeField] private AudioClip[] deathSounds;
 
     public Action<int> Destroyed;
 
@@ -72,6 +71,7 @@ public class EnemyController : MonoBehaviour
         {
             Destroyed?.Invoke(pointsForDestroy);
             player.OnEnemyDestroy();
+            AudioManager.instance.PlayEffect("EnemyDeath");
         }
 
         Deactivate();

@@ -6,7 +6,7 @@ public class UICanvas : MonoBehaviour
     [SerializeField] private DefeatScreen defeatScreen;
     [SerializeField] private ScoreManager scoreManager;
 
-    public void PlayerReceivedDamage(int value)
+    public void PlayerReceivedDamage()
     {
         scoreManager.SaveScore();
         scoreManager.HideScoreLabel();

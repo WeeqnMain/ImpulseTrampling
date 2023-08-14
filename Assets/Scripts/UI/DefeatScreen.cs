@@ -12,10 +12,6 @@ public class DefeatScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentHighscoreText;
     [SerializeField] private TextMeshProUGUI currentScoreText;
 
-    [Header("Sound")]
-    [SerializeField] private AudioSource clickSound;
-    [SerializeField] private AudioSource defeatSound;
-
     private void Awake()
     {
         var button = restartButton.GetComponent<Button>();
@@ -29,13 +25,13 @@ public class DefeatScreen : MonoBehaviour
         currentHighscoreText.enabled = !isHighscoreBeaten;
         highscoreBeatenText.enabled = isHighscoreBeaten;
         gameObject.SetActive(true);
-        defeatSound.Play();
+        AudioManager.instance.PlayEffect("Defeat");
     }
 
     private void RestartButtonClick()
     {
         restartButton.onClick.RemoveListener(RestartButtonClick);
-        clickSound.Play();
+        AudioManager.instance.PlayEffect("Click");
         SceneLoader.RestartScene();
     }
 }

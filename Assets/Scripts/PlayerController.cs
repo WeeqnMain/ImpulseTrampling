@@ -18,12 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private LayerMask groundLayer;
 
-    public Action<int> OnDamageReceive;
-
-    [Header("SoundEffects")]
-    [SerializeField] private AudioSource jumpSound;
-    [SerializeField] private AudioSource landSound;
-    [SerializeField] private AudioSource moveSound;
+    public Action OnDamageReceive;
 
     private void Awake()
     {
@@ -39,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
         if (!isGroundedInPreviousFrame && isGrounded)
         {
-            landSound.Play();
+            AudioManager.instance.PlayEffect("PlayerLand");
         }
 
         if (isGrounded)
@@ -67,7 +62,7 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         rigidbody.AddForce(jumpForce * transform.up);
-        jumpSound.Play();
+        AudioManager.instance.PlayEffect("PlayerJump");
     }
 
     private void Move()
@@ -90,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
     public void RecieveDamage()
     {
-        OnDamageReceive?.Invoke(0);
+        OnDamageReceive?.Invoke();
         Destroy(gameObject);
     }
 
