@@ -7,6 +7,7 @@ using System.Collections;
 public class DefeatScreen : MonoBehaviour
 {
     [SerializeField] private Button restartButton;
+    [SerializeField] private Button menuButton;
 
     [SerializeField] private TextMeshProUGUI highscoreBeatenText;
     [SerializeField] private TextMeshProUGUI currentHighscoreText;
@@ -14,8 +15,8 @@ public class DefeatScreen : MonoBehaviour
 
     private void Awake()
     {
-        var button = restartButton.GetComponent<Button>();
-        button.onClick.AddListener(RestartButtonClick);
+        restartButton.GetComponent<Button>().onClick.AddListener(RestartButtonClick);
+        menuButton.GetComponent<Button>().onClick.AddListener(MenuButtonClick);
     }
 
     public void Show(int score, bool isHighscoreBeaten)
@@ -33,5 +34,12 @@ public class DefeatScreen : MonoBehaviour
         restartButton.onClick.RemoveListener(RestartButtonClick);
         AudioManager.instance.PlayEffect("Click");
         SceneLoader.RestartScene();
+    }
+
+    private void MenuButtonClick()
+    {
+        menuButton.onClick.RemoveListener(MenuButtonClick);
+        AudioManager.instance.PlayEffect("Click");
+        SceneLoader.ChangeScene("MainMenu");
     }
 }
