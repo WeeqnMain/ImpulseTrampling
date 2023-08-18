@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,9 +48,9 @@ public class GameSettings : MonoBehaviour
 
     private void OnBackButtonClick()
     {
-        Unsubscribe();
+        //Unsubscribe();
         AudioManager.instance.PlayEffect("Click");
-        SceneLoader.ChangeScene("MainMenu");
+        SceneLoader.LoadScene("MainMenu");
     }
 
     private void OnMusicToggleChange(bool isOn)

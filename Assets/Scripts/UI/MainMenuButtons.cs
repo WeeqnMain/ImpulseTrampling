@@ -9,29 +9,41 @@ public class MainMenuButtons : MonoBehaviour
 
     private void Awake()
     {
+        Subscribe();
+    }
+    
+    private void Subscribe()
+    {
         playButton.GetComponent<Button>().onClick.AddListener(OnPlayButtonClick);
         settingsButton.GetComponent<Button>().onClick.AddListener(OnSettingsButtonClick);
         aboutButton.GetComponent<Button>().onClick.AddListener(OnAboutButtonClick);
     }
 
+    private void Unsubscribe()
+    {
+        playButton.GetComponent<Button>().onClick.RemoveListener(OnPlayButtonClick);
+        settingsButton.GetComponent<Button>().onClick.RemoveListener(OnSettingsButtonClick);
+        aboutButton.GetComponent<Button>().onClick.RemoveListener(OnAboutButtonClick);
+    }
+
     private void OnPlayButtonClick()
     {
+        //Unsubscribe();
         AudioManager.instance.PlayEffect("Click");
-        playButton.GetComponent<Button>().onClick.RemoveListener(OnPlayButtonClick);
-        SceneLoader.ChangeScene("GameScene");
+        SceneLoader.LoadScene("GameScene");
     }
 
     private void OnSettingsButtonClick()
     {
+        //Unsubscribe();
         AudioManager.instance.PlayEffect("Click");
-        settingsButton.GetComponent<Button>().onClick.RemoveListener(OnSettingsButtonClick);
-        SceneLoader.ChangeScene("Settings");
+        SceneLoader.LoadScene("Settings");
     }
 
     private void OnAboutButtonClick()
     {
+        //Unsubscribe();
         AudioManager.instance.PlayEffect("Click");
-        aboutButton.GetComponent<Button>().onClick.RemoveListener(OnAboutButtonClick);
-        SceneLoader.ChangeScene("About");
+        SceneLoader.LoadScene("About");
     }
 }

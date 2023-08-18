@@ -13,7 +13,7 @@ public class AboutSceneScript : MonoBehaviour
     private void OnBackButtonClick()
     {
         AudioManager.instance.PlayEffect("Click");
-        backButton.GetComponent<Button>().onClick.RemoveListener(OnBackButtonClick);
-        SceneLoader.ChangeScene("MainMenu");
+        //backButton.GetComponent<Button>().onClick.RemoveListener(OnBackButtonClick);
+        SceneLoader.LoadScene("MainMenu");
     }
 }

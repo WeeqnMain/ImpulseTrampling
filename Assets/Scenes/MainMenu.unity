@@ -836,10 +836,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1555895022}
+  - component: {fileID: 1555895023}
   - component: {fileID: 1555895021}
   - component: {fileID: 1555895020}
   - component: {fileID: 1555895019}
-  - component: {fileID: 1555895023}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged

@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
-using System.Collections;
 
 public class DefeatScreen : MonoBehaviour
 {
@@ -31,15 +29,15 @@ public class DefeatScreen : MonoBehaviour
 
     private void RestartButtonClick()
     {
-        restartButton.onClick.RemoveListener(RestartButtonClick);
+        //restartButton.onClick.RemoveListener(RestartButtonClick);
         AudioManager.instance.PlayEffect("Click");
-        SceneLoader.RestartScene();
+        SceneLoader.ReloadScene();
     }
 
     private void MenuButtonClick()
     {
-        menuButton.onClick.RemoveListener(MenuButtonClick);
+        //menuButton.onClick.RemoveListener(MenuButtonClick);
         AudioManager.instance.PlayEffect("Click");
-        SceneLoader.ChangeScene("MainMenu");
+        SceneLoader.LoadScene("MainMenu");
     }
 }
