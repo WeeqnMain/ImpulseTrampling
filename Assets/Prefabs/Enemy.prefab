@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa09fccb9b4b6d4fb7df977b6e70f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minEnemyMoveSpeed: 4
-  maxEnemyMoveSpeed: 6
+  minEnemyMoveSpeed: 2
+  maxEnemyMoveSpeed: 3
   lifeTime: 30
   minPointsForDestroy: 1
   maxPointsForDestroy: 2

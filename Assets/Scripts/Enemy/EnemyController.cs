@@ -61,7 +61,7 @@ public class EnemyController : MonoBehaviour
         var collider = contact.thisCollider;
 
         Instantiate(hitEffect, contact.point, Quaternion.identity, null);
-
+        
         if (collider == bodyCollider)
         {
             player.RecieveDamage();

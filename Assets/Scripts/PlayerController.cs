@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float extraGravityForce;
 
     private Vector3 inputDirection;
+    private MobileInput mobileInput;
 
     private bool isGrounded;
     [SerializeField] private Transform groundCheckPoint;
@@ -20,6 +21,18 @@ public class PlayerController : MonoBehaviour
 
     public Action OnDamageReceive;
 
+    public bool isInputFromMobile;
+
+    public void Init(MobileInput mobileInput = null)
+    {
+        isInputFromMobile = mobileInput != null;
+        if (isInputFromMobile)
+        {
+            this.mobileInput = mobileInput;
+            mobileInput.JumpButtonPressed += OnJumpButtonPressed;
+        }
+    }
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -27,22 +40,22 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        inputDirection = GetInputDirection();
+        inputDirection = isInputFromMobile ? mobileInput.direction : GetInputDirection();
      
         bool isGroundedInPreviousFrame = isGrounded;
         isGrounded = Physics.Raycast(groundCheckPoint.position, -transform.up, groundCheckDistance, groundLayer);
 
-        if (!isGroundedInPreviousFrame && isGrounded)
-        {
-            AudioManager.instance.PlayEffect("PlayerLand");
-        }
-
         if (isGrounded)
         {
-            LookAtDirection();
+            if (!isGroundedInPreviousFrame)
+                AudioManager.instance.PlayEffect("PlayerLand");
 
-            if (Input.GetKeyDown(KeyCode.Space))
-                Jump();
+            LookAtDirection();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump(checkGround: true);
         }
     }
 
@@ -59,8 +72,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Jump()
+    private void Jump(bool checkGround)
     {
+        if (checkGround)
+            if (!isGrounded) return;
+
         rigidbody.AddForce(jumpForce * transform.up);
         AudioManager.instance.PlayEffect("PlayerJump");
     }
@@ -91,7 +107,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnEnemyDestroy()
     {
-        Jump();
+        Jump(checkGround: false);
+    }
+
+    private void OnJumpButtonPressed()
+    {
+        Jump(checkGround: true);
     }
 
     private Vector3 GetInputDirection() => new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
