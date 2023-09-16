@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     public Action OnDamageReceive;
 
-    public bool isInputFromMobile;
+    private bool isInputFromMobile;
 
     public void Init(MobileInput mobileInput = null)
     {

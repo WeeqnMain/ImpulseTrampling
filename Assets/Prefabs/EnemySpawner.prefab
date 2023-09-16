@@ -301,16 +301,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c32743756e4fe45931a2d4b5736520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToEnemySpawn: 2
+  timeToEnemySpawn: 5
   capacity: 5
   autoExpand: 1
-  enemyPrefab: {fileID: 1086393491141130307, guid: 2976449518a8f864a9f00e78d97cf3c6, type: 3}
+  enemyPrefab: {fileID: 6796434150726086020, guid: 77188bf4818c01d4bab1a29ac9db1d07, type: 3}
   container: {fileID: 6412160380861630874}
   leftBottomPoint: {fileID: 853320696}
   leftTopPoint: {fileID: 1225300720}
   rightTopPoint: {fileID: 711610347}
   rightBottomPoint: {fileID: 516017091}
-  audioSource: {fileID: 7799265366743863144}
-  enemyDeathSounds:
-  - {fileID: 8300000, guid: eab7c37e1dc78bb43b5763e336898b9a, type: 3}
-  - {fileID: 8300000, guid: 6b392bb5f149d8246878306e2946e347, type: 3}

@@ -8,9 +8,9 @@ public class EnemySpawner : MonoBehaviour
     [Header("Pool")]
     [SerializeField] private int capacity;
     [SerializeField] private bool autoExpand;
-    [SerializeField] private EnemyController enemyPrefab;
+    [SerializeField] private Enemy enemyPrefab;
     [SerializeField] private Transform container;
-    private PoolMono<EnemyController> pool;
+    private PoolMono<Enemy> pool;
 
     private ScoreManager scoreManager;
 
@@ -27,7 +27,7 @@ public class EnemySpawner : MonoBehaviour
 
         enemySpawnPerimeter = new EnemySpawnPerimeter(leftBottomPoint, leftTopPoint, rightTopPoint, rightBottomPoint);
 
-        pool = new PoolMono<EnemyController>(enemyPrefab, capacity, container);
+        pool = new PoolMono<Enemy>(enemyPrefab, capacity, container);
         pool.autoExpand = autoExpand;
 
         foreach (var enemy in pool.GetAllElements())
@@ -48,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
         var instance = pool.GetFreeElement();
         instance.transform.position = enemySpawnPoint;
 
-        var enemy = instance.GetComponent<EnemyController>();
+        var enemy = instance.GetComponent<Enemy>();
         enemy.SetRotation(enemyRotateTo);
 
         if (pool.GetAllElements().Count > capacity)

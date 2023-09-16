@@ -2,15 +2,12 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(BoxCollider))]
-public class EnemyController : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     [Header("Enemy Specs")]
     [SerializeField] private int minEnemyMoveSpeed;
     [SerializeField] private int maxEnemyMoveSpeed;
     private float moveSpeed;
-
-    [SerializeField] private float lifeTime;
-    private float lifeTimer;
 
     [SerializeField] private int minPointsForDestroy;
     [SerializeField] private int maxPointsForDestroy;
@@ -31,29 +28,25 @@ public class EnemyController : MonoBehaviour
         transform.LookAt(rotateTo);
     }
 
-    private void Awake()
+    private void FixedUpdate()
     {
-        lifeTimer = lifeTime;
+        rigidbody.MovePosition(transform.position + moveSpeed * Time.fixedDeltaTime * transform.forward);
     }
 
-    private void OnEnable()
+    protected void EnableInit()
     {
-        lifeTimer = lifeTime;
         moveSpeed = UnityEngine.Random.Range(minEnemyMoveSpeed, maxEnemyMoveSpeed + 1);
         pointsForDestroy = UnityEngine.Random.Range(minPointsForDestroy, maxPointsForDestroy + 1);
     }
 
-    private void Update()
+    protected void HandleCollision(Collision collision)
     {
-        lifeTimer -= Time.deltaTime;
-        if (lifeTimer < 0f)
+        if (collision.gameObject.CompareTag("DeathWall"))
+        {
             Deactivate();
+            return;
+        }
 
-        rigidbody.MovePosition(transform.position + moveSpeed * Time.deltaTime * transform.forward);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
         var player = collision.gameObject.GetComponent<PlayerController>();
         if (player == null) return;
 
@@ -61,7 +54,7 @@ public class EnemyController : MonoBehaviour
         var collider = contact.thisCollider;
 
         Instantiate(hitEffect, contact.point, Quaternion.identity, null);
-        
+
         if (collider == bodyCollider)
         {
             player.RecieveDamage();
