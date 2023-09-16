@@ -77,7 +77,11 @@ public class PlayerController : MonoBehaviour
         if (checkGround)
             if (!isGrounded) return;
 
-        rigidbody.AddForce(jumpForce * transform.up);
+        if (rigidbody.velocity.sqrMagnitude < 1f)
+        {
+            rigidbody.AddForce(jumpForce * transform.up);
+        }
+
         AudioManager.instance.PlayEffect("PlayerJump");
     }
 

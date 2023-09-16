@@ -11,15 +11,15 @@ public abstract class Enemy : MonoBehaviour
 
     [SerializeField] private int minPointsForDestroy;
     [SerializeField] private int maxPointsForDestroy;
-    private int pointsForDestroy;
+    protected int pointsForDestroy;
 
     [Header("Physics")]
     [SerializeField] private Rigidbody rigidbody;
-    [SerializeField] private BoxCollider bodyCollider;
-    [SerializeField] private BoxCollider hitCollider;
+    [SerializeField] protected BoxCollider bodyCollider;
+    [SerializeField] protected BoxCollider hitCollider;
 
     [Header("Effects")]
-    [SerializeField] private GameObject hitEffect;
+    [SerializeField] protected GameObject hitEffect;
 
     public Action<int> Destroyed;
 
@@ -62,15 +62,23 @@ public abstract class Enemy : MonoBehaviour
 
         else if (collider == hitCollider)
         {
-            Destroyed?.Invoke(pointsForDestroy);
             player.OnEnemyDestroy();
+            Destroyed?.Invoke(pointsForDestroy);
             AudioManager.instance.PlayEffect("EnemyDeath");
         }
 
         Deactivate();
     }
 
-    private void Deactivate()
+    public void Destroy()
+    {
+        Instantiate(hitEffect, transform.position + new Vector3(0, .5f, 0), Quaternion.identity, null);
+        Destroyed?.Invoke(pointsForDestroy);
+        AudioManager.instance.PlayEffect("EnemyDeath");
+        Deactivate();
+    }
+
+    protected void Deactivate()
     {
         gameObject.SetActive(false);
     }
