@@ -48,15 +48,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38a93f753de27548a3bbf002d3efe11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minEnemyMoveSpeed: 2
-  maxEnemyMoveSpeed: 3
-  minPointsForDestroy: 6
-  maxPointsForDestroy: 8
+  minEnemyMoveSpeed: 3
+  maxEnemyMoveSpeed: 4
+  minPointsForDestroy: 10
+  maxPointsForDestroy: 12
   rigidbody: {fileID: 1086393491141130306}
   bodyCollider: {fileID: 3461417998656345578}
   hitCollider: {fileID: 1049013067649508899}
   hitEffect: {fileID: 339341285434815660, guid: 01712080762885a43a9eb09d24220d83, type: 3}
+  rotationTimeInterval: 1.3
+  minRotationAngle: 0
+  maxRotationAngle: 120
+  rotateSpeed: 150
   explosionRange: 5
+  exlodeLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!54 &1086393491141130306
 Rigidbody:
   m_ObjectHideFlags: 0

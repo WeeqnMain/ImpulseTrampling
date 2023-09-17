@@ -28,6 +28,14 @@ public abstract class Enemy : MonoBehaviour
         transform.LookAt(rotateTo);
     }
 
+    public void Destroy()
+    {
+        Instantiate(hitEffect, transform.position + new Vector3(0, .5f, 0), Quaternion.identity, null);
+        Destroyed?.Invoke(pointsForDestroy);
+        AudioManager.instance.PlayEffect("EnemyDeath");
+        Deactivate();
+    }
+
     private void FixedUpdate()
     {
         rigidbody.MovePosition(transform.position + moveSpeed * Time.fixedDeltaTime * transform.forward);
@@ -67,14 +75,6 @@ public abstract class Enemy : MonoBehaviour
             AudioManager.instance.PlayEffect("EnemyDeath");
         }
 
-        Deactivate();
-    }
-
-    public void Destroy()
-    {
-        Instantiate(hitEffect, transform.position + new Vector3(0, .5f, 0), Quaternion.identity, null);
-        Destroyed?.Invoke(pointsForDestroy);
-        AudioManager.instance.PlayEffect("EnemyDeath");
         Deactivate();
     }
 
